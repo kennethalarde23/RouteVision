@@ -33,7 +33,7 @@ This project was built using the following technologies:
 *   **Icons:** FontAwesome 6
 *   **Fonts:** Inter (Google Fonts)
 
-## 👥 The Engineering Team
+## 👥 The Developer Team
 
 | Name | Role |
 | :--- | :--- |
