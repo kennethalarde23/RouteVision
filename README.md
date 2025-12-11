@@ -43,13 +43,28 @@ This project was built using the following technologies:
 | **Jigger Gayares** | Backend Dev & Programmer |
 | **John Rick Magtibay** | Database Manager & Dev |
 
-## 🚀 How to Run
+---
 
-1.  Clone the repository:
+## 🚀 Access & Installation
+
+You have two options to view and test this project:
+
+### Option 1: Live Website (Recommended)
+You can access the fully functional deployed application immediately via Firebase Hosting. No download required.
+
+👉 **Link:** **[https://routevision-1ae3a.web.app/index.html](https://routevision-1ae3a.web.app/index.html)**
+
+### Option 2: Run Locally (VS Code)
+If you prefer to download the files and run them on your own machine:
+
+1.  **Clone the repository:**
     ```bash
     git clone https://github.com/kennethalarde23/RouteVision.git
     ```
-2.  Open the folder in VS Code.
-3.  Because the project uses ES6 Modules (`import`/`export`), you must run it using a local server.
-    *   **Recommended:** Use the "Live Server" extension in VS Code.
+2.  **Open the folder** in VS Code.
+3.  **Launch the Server:**
+    *   Because this project uses ES6 Modules (`import`/`export`), you cannot simply double-click the HTML file.
+    *   Use the **"Live Server"** extension in VS Code.
     *   Right-click `index.html` and select **"Open with Live Server"**.
+
+> **Note on Database:** Even when running locally, the application will connect to our live **Firebase Firestore** database. As long as you have an internet connection, you will be able to log in, save diagrams, and load projects successfully.
