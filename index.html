@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access | RouteVision</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%236d28d9' d='M416 160c0-35.3-28.7-64-64-64s-64 28.7-64 64c0 23.7 12.9 44.4 32 55.4v5.1c0 20.8-13.3 38.6-32.3 43.1L221.7 240c-15.6-15.6-40.9-15.6-56.6 0l-72 72c-15.6 15.6-15.6 40.9 0 56.6l24 24c15.6 15.6 40.9 15.6 56.6 0l24.9-24.9c16.1-12.2 37.9-15.3 56.6-9.4l24.9 24.9c12.5 12.5 32.8 12.5 45.3 0l48.4-48.4c12.5-12.5 12.5-32.8 0-45.3l-24.9-24.9c5.9-18.7 2.8-40.5-9.4-56.6l-24.9-24.9c-12.5-12.5-12.5-32.8 0-45.3l17.4-17.4C387.3 204.4 416 185.7 416 160z'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="login-body">
+    
+    <div class="login-wrapper">
+        <div class="login-container">
+            
+          
+            <div class="login-image-side">
+                <div class="image-overlay">
+                    <div class="brand-tag">
+                        <i class="fas fa-route"></i> RouteVision
+                    </div>
+                    <div class="overlay-text">
+                        <h2>Network Intelligence.</h2>
+                        <p>Simulate, Visualize, Optimize.</p>
+                        <div class="slider-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <img src="images/networking login.png" alt="Abstract Network" class="bg-img">
+            </div>
+
+          
+            <div class="login-form-side">
+                
+           
+                <div class="form-content">
+                    
+                   
+                    <div id="register-view">
+                        <div class="form-header">
+                            <h2>Create an account</h2>
+                            <p>Already have an account? <a href="#" id="showLoginLink">Log in</a></p>
+                        </div>
+
+                        <form id="registerForm">
+                            <div class="input-row">
+                                <div class="modern-input-group">
+                                    <input type="text" id="reg-username" required placeholder=" ">
+                                    <label>Username</label>
+                                </div>
+                            </div>
+
+                            <div class="modern-input-group">
+                                <input type="email" id="reg-email" required placeholder=" ">
+                                <label>Email Address</label>
+                            </div>
+
+                            <div class="modern-input-group">
+                                <input type="password" id="reg-password" required placeholder=" ">
+                                <label>Password</label>
+                                <i class="far fa-eye toggle-password"></i>
+                            </div>
+
+                            <div class="terms-check">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                            </div>
+
+                            <button type="submit" class="btn-primary-modern">Create account</button>
+                        </form>
+                    </div>
+
+                  
+                    <div id="login-view" style="display: none;">
+                        <div class="form-header">
+                            <h2>Welcome back</h2>
+                            <p>New here? <a href="#" id="showRegisterLink">Create an account</a></p>
+                        </div>
+
+                        <form id="loginForm">
+                            <div class="modern-input-group">
+                                <input type="text" id="login-username" required placeholder=" ">
+                                <label>Username</label>
+                            </div>
+
+                            <div class="modern-input-group">
+                                <input type="password" id="login-password" required placeholder=" ">
+                                <label>Password</label>
+                               
+                                <i class="far fa-eye toggle-password"></i>
+                            </div>
+
+                            <button type="submit" class="btn-primary-modern">Log in</button>
+                        </form>
+                    </div>
+
+   
+                    <div class="divider">
+                        <span>Or continue with</span>
+                    </div>
+
+                    <div class="social-actions">
+                        <button id="googleBtn" class="social-btn">
+                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                            Google
+                        </button>
+                    </div>
+
+                    <p id="authMessage" class="auth-message"></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        const regView = document.getElementById('register-view');
+        const loginView = document.getElementById('login-view');
+        
+        document.getElementById('showLoginLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            regView.style.display = 'none';
+            loginView.style.display = 'block';
+            loginView.classList.add('fade-in');
+        });
+
+        document.getElementById('showRegisterLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginView.style.display = 'none';
+            regView.style.display = 'block';
+            regView.classList.add('fade-in');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | RouteVision</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2338bdf8' d='M416 160c0-35.3-28.7-64-64-64s-64 28.7-64 64c0 23.7 12.9 44.4 32 55.4v5.1c0 20.8-13.3 38.6-32.3 43.1L221.7 240c-15.6-15.6-40.9-15.6-56.6 0l-72 72c-15.6 15.6-15.6 40.9 0 56.6l24 24c15.6 15.6 40.9 15.6 56.6 0l24.9-24.9c16.1-12.2 37.9-15.3 56.6-9.4l24.9 24.9c12.5 12.5 32.8 12.5 45.3 0l48.4-48.4c12.5-12.5 12.5-32.8 0-45.3l-24.9-24.9c5.9-18.7 2.8-40.5-9.4-56.6l-24.9-24.9c-12.5-12.5-12.5-32.8 0-45.3l17.4-17.4C387.3 204.4 416 185.7 416 160z'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="protected-body homepage-bg">
+    <div class="content-container services-main">
+
+        <h2 class="section-title"><i class="fas fa-network-wired"></i> NETWORK SIMULATION CORE</h2>
+
+        <div class="control-bar">
+            <button id="createNewDiagramBtn" class="btn-control btn-new">
+                <i class="fas fa-plus-circle"></i> NEW PROJECT
+            </button>
+            <button id="saveDiagramBtn" class="btn-control btn-save">
+                <i class="fas fa-save"></i> SAVE TOPOLOGY
+            </button>
+            
+            <button id="startSimulationBtn" class="btn-control btn-primary">
+                <i class="fas fa-play"></i> RUN TRACEROUTE
+            </button>
+            
+            <button id="realtimeSimBtn" class="btn-control btn-realtime">
+                <i class="fas fa-satellite-dish"></i> REALTIME PACKET
+            </button>
+        </div>
+
+        <p id="simulationMessage" style="text-align:center; min-height: 20px;">Ready. Double-click a device to configure IP & Routing.</p>
+
+        <div class="simulation-area">
+            <div class="palette-sidebar">
+                <h3><i class="fas fa-boxes"></i> Components</h3>
+                <div id="componentPalette" class="palette-box"></div>
+            </div>
+
+            <div class="diagram-main-area">
+                <div id="networkDiagram" class="diagram-box"></div>
+            </div>
+        </div>
+
+        <div class="saved-diagrams-list-section">
+            <h2><i class="fas fa-server"></i> SAVED TOPOLOGIES (<span id="totalDiagrams">0</span>)</h2>
+            <div id="savedDiagramsList" class="saved-diagrams-list"></div>
+        </div>
+    </div>
+
+    <div id="configModal" class="config-modal-overlay">
+        <div class="config-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> Configure Device</h3>
+                <button onclick="closeConfigModal()" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="cfg-node-key">
+                <input type="hidden" id="cfg-device-type">
+                
+                <div class="input-group">
+                    <label>Device Name</label>
+                    <input type="text" id="cfg-name">
+                </div>
+                <div class="input-group">
+                    <label>Interface IP Address</label>
+                    <input type="text" id="cfg-ip" placeholder="e.g. 192.168.1.1">
+                </div>
+                <div class="input-group">
+                    <label>Subnet Mask</label>
+                    <input type="text" id="cfg-mask" placeholder="e.g. 255.255.255.0">
+                </div>
+                <div id="end-device-settings">
+                    <div class="input-group">
+                        <label>Default Gateway (Router IP)</label>
+                        <input type="text" id="cfg-gateway" placeholder="e.g. 192.168.1.1">
+                    </div>
+                </div>
+                <div id="router-settings" style="display:none;">
+                    <label style="color:var(--neon-yellow); font-size:0.9rem; margin-bottom:5px; display:block;">
+                        <i class="fas fa-route"></i> Static Routing Table
+                    </label>
+                    <div class="routing-table-wrapper">
+                        <table id="routingTableUI">
+                            <thead>
+                                <tr><th>Dest. Network</th><th>Next Hop IP</th><th>Action</th></tr>
+                            </thead>
+                            <tbody id="routingTableBody"></tbody>
+                        </table>
+                        <button type="button" onclick="window.addRouteRow()" class="btn-add-route">+ Add Route</button>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button onclick="saveConfig()" class="btn-save-cfg">Save Configuration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="saveProjectModal" class="config-modal-overlay">
+        <div class="config-modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-save"></i> Save Topology</h3>
+                <button onclick="window.closeAllModals()" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">Enter a unique name for this network configuration.</p>
+                <div class="input-group">
+                    <label>Project Title</label>
+                    <input type="text" id="save-diagram-title" placeholder="e.g., Enterprise Core V2" autocomplete="off">
+                </div>
+                <div class="modal-actions" style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button onclick="window.closeAllModals()" class="btn-control" style="background: transparent; border: 1px solid #475569; color: #cbd5e1; flex: 1; justify-content: center;">Cancel</button>
+                    <button id="confirmSaveBtn" class="btn-save-cfg" style="flex: 1; background: var(--neon-blue); color: #0f172a;">Confirm Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="saveProgressModal" class="config-modal-overlay" style="z-index: 2005;">
+        <div class="config-modal" style="width: 300px; text-align: center; border-color: var(--neon-purple);">
+            <h3 style="color: var(--neon-purple); margin-bottom: 20px;">Saving Project...</h3>
+            <div class="progress-circle-container"><div class="progress-circle" id="saveProgressCircle"><span id="saveProgressText">0%</span></div></div>
+            <p id="saveProgressStatus" style="margin-top: 20px; color: #94a3b8; font-size: 0.85rem;">Encrypting data...</p>
+        </div>
+    </div>
+
+    <div id="loadConfirmModal" class="config-modal-overlay">
+        <div class="config-modal" style="max-width: 400px; border-color: var(--lux-gold-start);">
+            <div class="modal-header">
+                <h3 style="color: var(--lux-gold-start);"><i class="fas fa-folder-open"></i> Load Project?</h3>
+                <button onclick="window.closeAllModals()" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5;">Are you sure you want to load this topology? <br><span style="color: #ef4444; font-size: 0.85rem;">Any unsaved changes on the current canvas will be lost.</span></p>
+                <div class="modal-actions" style="display: flex; gap: 10px;">
+                    <button onclick="window.closeAllModals()" class="btn-control" style="background: transparent; border: 1px solid #475569; color: #cbd5e1; flex: 1; justify-content: center;">Cancel</button>
+                    <button id="confirmLoadBtn" class="btn-save-cfg" style="flex: 1; background: var(--lux-gold-start); color: #0f172a;">Yes, Load It</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteConfirmModal" class="config-modal-overlay">
+        <div class="config-modal" style="max-width: 400px; border-color: var(--neon-red);">
+            <div class="modal-header">
+                <h3 style="color: var(--neon-red);"><i class="fas fa-trash-alt"></i> Delete Project?</h3>
+                <button onclick="window.closeAllModals()" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px;">This action cannot be undone. The topology will be permanently removed from the database.</p>
+                <div class="modal-actions" style="display: flex; gap: 10px;">
+                    <button onclick="window.closeAllModals()" class="btn-control" style="background: transparent; border: 1px solid #475569; color: #cbd5e1; flex: 1; justify-content: center;">Cancel</button>
+                    <button id="confirmDeleteBtn" class="btn-save-cfg btn-danger" style="flex: 1; background: var(--neon-red); color: white;">Yes, Delete It</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteProgressModal" class="config-modal-overlay" style="z-index: 2005;">
+        <div class="config-modal" style="width: 300px; text-align: center; border-color: var(--neon-red);">
+            <h3 style="color: var(--neon-red); margin-bottom: 20px;">Deleting Project...</h3>
+            <div class="progress-circle-container"><div class="progress-circle danger" id="deleteProgressCircle"><span id="deleteProgressText">0%</span></div></div>
+            <p id="deleteProgressStatus" style="margin-top: 20px; color: #94a3b8; font-size: 0.85rem;">Connecting to database...</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/gojs/release/go.js"></script>
+    <script src="diagram.js"></script> 
+    <script type="module" src="app.js"></script>
+
+    <script>
+        function closeConfigModal() {
+            document.getElementById('configModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

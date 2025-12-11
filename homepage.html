@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | RouteVision</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2338bdf8' d='M416 160c0-35.3-28.7-64-64-64s-64 28.7-64 64c0 23.7 12.9 44.4 32 55.4v5.1c0 20.8-13.3 38.6-32.3 43.1L221.7 240c-15.6-15.6-40.9-15.6-56.6 0l-72 72c-15.6 15.6-15.6 40.9 0 56.6l24 24c15.6 15.6 40.9 15.6 56.6 0l24.9-24.9c16.1-12.2 37.9-15.3 56.6-9.4l24.9 24.9c12.5 12.5 32.8 12.5 45.3 0l48.4-48.4c12.5-12.5 12.5-32.8 0-45.3l-24.9-24.9c5.9-18.7 2.8-40.5-9.4-56.6l-24.9-24.9c-12.5-12.5-12.5-32.8 0-45.3l17.4-17.4C387.3 204.4 416 185.7 416 160zM172.7 212.3c1.2-1 2.3-2.1 3.4-3.2l48.4-48.4c15.6-15.6 15.6-40.9 0-56.6l-24-24c-15.6-15.6-40.9-15.6-56.6 0l-96 96c-15.6 15.6-15.6 40.9 0 56.6l24 24c15.6 15.6 40.9 15.6 56.6 0l24.9-24.9c16.5-16.5 42.5-17.5 60.2-2.3-1.2 1-2.3 2.1-3.4 3.2l-24.9 24.9c-15.6 15.6-40.9 15.6-56.6 0l-24.9-24.9c-16.1-12.2-37.9-15.3-56.6-9.4L96.2 227.3c-12.5-12.5-32.8-12.5-45.3 0l-24 24c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l5.1-5.1c4.5-19 22.3-32.3 43.1-32.3v-5.1c11-19.1 31.7-32 55.4-32c35.3 0 64 28.7 64 64s-28.7 64-64 64s-64-28.7-64-64c0-11.7 3.2-22.6 8.7-32H192v-16c0-35.3 28.7-64 64-64h16c-9.4 5.5-20.3 8.7-32 8.7c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64c0 11.7-3.2 22.6-8.7 32H320v16c0 35.3-28.7 64-64 64h-16c9.4-5.5 20.3-8.7 32-8.7z'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="protected-body homepage-bg">
+    
+    <div class="content-container">
+        
+        <div class="homepage-hero">
+            <div class="hero-text">
+                <div style="display:inline-block; padding: 5px 10px; background: rgba(56,189,248,0.1); border: 1px solid var(--neon-blue); border-radius: 4px; font-size: 0.8rem; color: var(--neon-blue); margin-bottom: 15px;">
+                    <i class="fas fa-circle" style="font-size: 8px;"></i> SYSTEM ONLINE V1.0
+                </div>
+                <h1>NETWORK CORE <br><span style="color: var(--neon-blue)">VISUALIZER</span></h1>
+                <p>
+                    Deploy, simulate, and analyze complex network topologies in a risk-free 
+                    virtual environment. Utilize our Deep Packet Inspection algorithms to optimize latency before going live.
+                </p>
+                <a href="services.html" class="hero-cta-btn">
+                    <i class="fas fa-terminal"></i> INITIALIZE SIMULATION
+                </a>
+            </div>
+            
+            <div class="hero-image-container">
+                <img src="images/network eng.png" alt="RouteVision Interface">
+            </div>
+        </div>
+
+        <h2 class="section-title" style="text-align: center; border-bottom: none; margin-bottom: 20px; color: var(--neon-yellow);">
+            <i class="fas fa-tachometer-alt"></i> DASHBOARD
+        </h2>
+
+        <div class="dashboard-grid">
+            
+            <div class="dashboard-card">
+                <i class="fas fa-project-diagram dash-icon icon-blue"></i>
+                <div class="dash-number" id="dashTotalSaved">0</div> <div class="dash-label">Total Saved Diagrams</div>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fas fa-network-wired dash-icon icon-green"></i>
+                <div class="dash-number" id="dashActiveDevices">0</div> <div class="dash-label">Active Devices</div>
+            </div>
+
+           
+            <div class="dashboard-card">
+                <i class="fas fa-chart-line dash-icon icon-yellow"></i>
+                <div class="dash-number" id="dashLastSim" style="font-size: 1.8rem;">N/A</div>
+                <div class="dash-label">Last Simulation Success</div>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fas fa-clock dash-icon icon-grey"></i>
+                <div class="dash-number" style="font-size: 1.8rem;" id="dashLastActivity">Just Now</div> <div class="dash-label">Last Activity</div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-bezier-curve"></i>
+                <h4>Topology Design</h4>
+                <p>Drag-and-drop interface with intelligent snapping and auto-linking capabilities.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-virus"></i>
+                <h4>User Friendly</h4>
+                <p>Test system with its user friendly interface for all users.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h4>Real-Time Sim</h4>
+                <p>Visualize packet flow and calculate metrics instantly.</p>
+            </div>
+        </div>
+
+    </div>
+
+ <script type="module" src="app.js"></script>
+</body>
+</html>
